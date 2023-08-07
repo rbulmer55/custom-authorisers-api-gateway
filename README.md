@@ -1,14 +1,19 @@
-# Welcome to your CDK TypeScript project
+# Cognito Custom Authoriser
 
-This is a blank project for CDK development with TypeScript.
+This example application creates an API gateway with custom Congito Authentication.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+![architecture](./architecture.png 'Architecture')
 
-## Useful commands
+For example purposes we have a endpoint to retrieve a token for a user in the Cognito UserPool.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+`POST /v1/login` - returns JWT access token with scopes
+
+The Simple Get Lambda is behind the custom authoriser which validates the JWT passed in, and rejects if the token is invalid.
+
+`GET /v1/` - Checks Access token beofre executing the function
+
+## Known issues
+
+### Custom Scopes
+
+Currently the login endpoint cannot provide custom user scopes when authenticating with SRP auth - `https://github.com/aws-amplify/amplify-js/issues/3732`. To extend using custom scopes use a hosted UI for access token generation rather than the [Resource Owner Flow method used in this demonstration](https://auth0.com/docs/get-started/authentication-and-authorization-flow/resource-owner-password-flow)
