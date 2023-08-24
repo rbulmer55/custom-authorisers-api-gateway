@@ -5,6 +5,8 @@ export const simpleGetHandler: APIGatewayProxyHandler = async (
 ) => {
 	return {
 		statusCode: 200,
-		body: 'Hello, you are authorised',
+		body: `Hello, you are authorised, You have access to: ${JSON.stringify(
+			event.requestContext.authorizer?.groups
+		)}`,
 	};
 };

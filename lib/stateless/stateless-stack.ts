@@ -12,6 +12,10 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 import { join } from 'path';
 
+const msClientId = process.env.MS_CLIENT_ID;
+const msClientSecret = process.env.MS_CLIENT_SECRET;
+const msTenant = process.env.MS_TENANT;
+
 interface statelsssProps extends cdk.StackProps {
 	userPoolId: string;
 	clientId: string;
@@ -27,6 +31,10 @@ function validateProps(props: statelsssProps) {
 export class CognitoCustomAuthStackStateless extends cdk.Stack {
 	constructor(scope: Construct, id: string, props: statelsssProps) {
 		super(scope, id, props);
+
+		if (!msTenant || !msClientId || !msClientSecret) {
+			throw new Error('AD Environment not set');
+		}
 
 		validateProps(props);
 		/**
@@ -101,6 +109,9 @@ export class CognitoCustomAuthStackStateless extends cdk.Stack {
 				environment: {
 					USER_POOL_ID: props.userPoolId,
 					CLIENT_ID: props.clientId,
+					MS_CLIENT_ID: msClientId,
+					MS_CLIENT_SECRET: msClientSecret,
+					MS_TENANT: msTenant,
 				},
 			}
 		);

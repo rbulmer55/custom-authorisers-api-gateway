@@ -8,7 +8,8 @@
 		"build": "tsc",
 		"watch": "tsc -w",
 		"test": "jest",
-		"cdk": "cdk"
+		"cdk": "cdk",
+		"deploy": "AD_META_URL=xxx MS_CLIENT_ID=xxx MS_CLIENT_SECRET=xxx MS_TENANT=xxx cdk deploy --all"
 	},
 	"devDependencies": {
 		"@types/aws-lambda": "^8.10.119",
@@ -26,6 +27,7 @@
 		"amazon-cognito-identity-js": "^6.3.1",
 		"aws-cdk-lib": "2.72.1",
 		"aws-jwt-verify": "^4.0.0",
+		"axios": "^1.4.0",
 		"constructs": "^10.0.0",
 		"source-map-support": "^0.5.21"
 	}

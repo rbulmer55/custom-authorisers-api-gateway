@@ -25,6 +25,7 @@ function asyncAuthenticateUser(
 	});
 }
 
+// please don't use this auth flow
 export const loginHandler: APIGatewayProxyHandler = async (
 	event: APIGatewayProxyEvent
 ) => {
