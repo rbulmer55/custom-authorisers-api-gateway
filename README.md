@@ -1,6 +1,6 @@
 # Cognito Custom Authoriser
 
-This example application creates an API gateway with custom Congito Authentication.
+This example application creates an API gateway with custom Cognito Authentication.
 
 ![architecture](./architecture.png 'Architecture')
 
@@ -13,6 +13,8 @@ The Simple Get Lambda is behind the custom authoriser which validates the JWT pa
 `GET /v1/` - Checks Access token beofre executing the function
 
 ## Known issues
+
+Do not use the login enpoint included in the repo, instead follow token generation using https://medium.com/aws-tip/authorisation-code-flow-with-pkce-using-vuejs-and-aws-cognito-893ac17299fb
 
 ### Custom Scopes
 

@@ -30,6 +30,7 @@ export class CognitoCustomAuthStackStateful extends cdk.Stack {
 			userPoolName: 'custom-auth-user-pool',
 			removalPolicy: cdk.RemovalPolicy.DESTROY,
 			customAttributes: {
+				// add a custom attribute for groups from our idp
 				groups: new StringAttribute({ mutable: true }),
 			},
 		});
@@ -56,6 +57,7 @@ export class CognitoCustomAuthStackStateful extends cdk.Stack {
 			{
 				metadata: ipSAMLMeta,
 				userPool,
+				// add our idp mapping for our custom group user pool attribute
 				attributeMapping: {
 					custom: {
 						'custom:groups': {
@@ -77,12 +79,12 @@ export class CognitoCustomAuthStackStateful extends cdk.Stack {
 			oAuth: {
 				flows: {
 					authorizationCodeGrant: true,
-					implicitCodeGrant: true, //enabled for testing,
 				},
-				//change this with UI deployments
+				// change this with UI deployments
 				callbackUrls: ['http://localhost:5173/login/oauth2/code/cognito/'],
 				logoutUrls: ['http://localhost:5173/'],
 			},
+			// add in our Azure idp to the client
 			supportedIdentityProviders: [
 				{ name: customIdentityProvider.providerName },
 			],

@@ -91,7 +91,7 @@ export class CognitoCustomAuthStackStateless extends cdk.Stack {
 		});
 
 		/**
-		 * Create our custom congito authoriser lambda
+		 * Create our custom cognito authoriser lambda
 		 */
 		const customAuthoriser: NodejsFunction = new NodejsFunction(
 			this,
@@ -140,6 +140,7 @@ export class CognitoCustomAuthStackStateless extends cdk.Stack {
 
 		/**
 		 * Create our login endpoint to retrieve a token
+		 * Do not use, see https://medium.com/aws-tip/authorisation-code-flow-with-pkce-using-vuejs-and-aws-cognito-893ac17299fb
 		 */
 		const token = v1.addResource('login');
 		token.addMethod(
